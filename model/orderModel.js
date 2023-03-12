@@ -17,7 +17,7 @@ const singleOrderItem = mongoose.Schema({
         type : Number,
         required : true
     },
-    productid : {
+    productId : {
         type : mongoose.Schema.ObjectId,
         required : true,
         ref : "Product"
@@ -47,7 +47,7 @@ const orderSchema = mongoose.Schema({
         default :'pending'
     },
     clientSecret : {
-        type : Number,
+        type : String,
         required : true
     },
     paymentId : {

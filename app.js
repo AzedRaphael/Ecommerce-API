@@ -10,13 +10,26 @@ const cors = require('cors')
 const connectDB = require('./db/connect');
 const errorHandler = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const rateLimiter = require('express-rate-limiter');
+const helmet = require('helmet');
+const xss = require('xss-clean')
+const mongoSanitize = require('express-mongo-sanitize')
 const cloudinary = require('cloudinary').v2
 cloudinary.config({
     cloud_name : process.env.CLOUDINARY_NAME,
     api_key : process.env.CLOUDINARY_API_KEY,
     api_secret : process.env.CLOUDINARY_API_SECRET
 })
+app.set("trust proxy ", 1 )
+app.use(rateLimiter({
+    windowMs : 15 * 60 * 1000,
+    max : 60
+}));
+
+app.use(helmet())
+app.use(xss())
+app.use(mongoSanitize())
 
 app.use(express.static('./public'))
 app.use(cookieParser(process.env.JWT_SECRET))
