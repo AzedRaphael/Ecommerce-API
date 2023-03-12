@@ -31,7 +31,7 @@ app.use(helmet())
 app.use(xss())
 app.use(mongoSanitize())
 
-app.use(express.static('./public'))
+app.use(express.static('./public/frontend'))
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.urlencoded({extended:false}));
 app.use(express.json())
