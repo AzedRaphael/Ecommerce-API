@@ -11,7 +11,7 @@ const connectDB = require('./db/connect');
 const errorHandler = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
 const fileUpload = require('express-fileupload');
-const rateLimiter = require('express-rate-limiter');
+const rateLimiter = require('express-rate-limit');
 const helmet = require('helmet');
 const xss = require('xss-clean')
 const mongoSanitize = require('express-mongo-sanitize')
@@ -24,7 +24,8 @@ cloudinary.config({
 app.set("trust proxy ", 1 )
 app.use(rateLimiter({
     windowMs : 15 * 60 * 1000,
-    max : 60
+    max : 60,
+    message: 'Too many requests from this IP, please try again later'
 }));
 
 app.use(helmet())
