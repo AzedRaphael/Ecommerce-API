@@ -46,7 +46,8 @@ const sendEmail = async(subject, send_to, sent_from, reply_to, template, name, l
         if(err){
             console.log(err);
         }else{
-            console.log(info);
+            // console.log(info);
+            console.info('Sending email...');
         }
     })
 }

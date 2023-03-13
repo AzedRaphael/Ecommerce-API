@@ -63,7 +63,7 @@ const updateProducts = asyncHandlers(async(req,res)=>{
         res.status(404)
         throw new Error('Product not found') 
     }
-    res.status(200).json({msg:"Product deleted successfully"})
+    res.status(200).json({msg:"Product Updated successfully"})
 });
 
 
